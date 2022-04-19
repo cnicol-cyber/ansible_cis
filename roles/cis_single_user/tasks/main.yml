@@ -1,0 +1,15 @@
+---
+
+- name: CIS 1.5.3 | require emergency mode password
+  lineinfile:
+    create: true
+    dest: /usr/lib/systemd/system/emergency.service
+    regexp: ^#?ExecStart=
+    line: ExecStart=-/usr/lib/systemd/systemd-sulogin-shell emergency
+
+- name: CIS 1.5.3 | require single user mode password
+  lineinfile:
+    create: true
+    dest: /usr/lib/systemd/system/rescue.service
+    regexp: ^#?ExecStart=
+    line: ExecStart=-/usr/lib/systemd/systemd-sulogin-shell rescue

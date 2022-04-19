@@ -1,0 +1,13 @@
+---
+
+- name: CIS 4.2.1.1 | ensure rsyslog is installed
+  package:
+    name: rsyslog
+    state: present
+
+- name: CIS 4.2.1.2 | ensure rsyslog is enabled
+  service:
+    name: rsyslog
+    state: "{{ rsyslog_service_state }}"
+    enabled: "{{ rsyslog_service_enabled }}"
+    masked: "{{ rsyslog_service_masked }}"

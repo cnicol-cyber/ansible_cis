@@ -1,0 +1,5 @@
+auditd_max_log_file: 8
+auditd_max_log_file_action: rotate
+auditd_admin_space_left_action: halt
+auditd_space_left_action: email
+auditd_action_mail_acct: root

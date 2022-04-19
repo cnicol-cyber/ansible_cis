@@ -1,0 +1,51 @@
+---
+
+- name: CIS 5.5.1.1 | set password expiration
+  lineinfile:
+    create: true
+    dest: /etc/login.defs
+    regexp: ^#?PASS_MAX_DAYS
+    line: PASS_MAX_DAYS {{ accounts_maximum_age_login_defs }}
+
+- name: CIS 5.5.1.2 | set days between password changes
+  lineinfile:
+    create: true
+    dest: /etc/login.defs
+    regexp: ^#?PASS_MIN_DAYS
+    line: PASS_MIN_DAYS {{ accounts_minimum_age_login_defs }}
+
+- name: CIS 5.5.1.3 | set password warning
+  lineinfile:
+    create: true
+    dest: /etc/login.defs
+    regexp: ^PASS_WARN_AGE *[0-9]*
+    line: PASS_WARN_AGE {{ accounts_pass_warn_age }}
+
+- name: CIS 5.5.1.4 | inactive password lock 
+  lineinfile:
+    create: true
+    dest: /etc/default/useradd
+    regexp: ^INACTIVE
+    line: INACTIVE={{ account_disable_post_pw_expiration }}
+
+- name: CIS 5.5.3 | set default shell timeout
+  lineinfile:
+    path: /etc/profile
+    create: true
+    line: TMOUT={{ var_accounts_tmout }}
+    state: present
+    validate: bash -n %s
+
+- name: CIS 5.5.5 | set user umask in /etc/profile
+  replace:
+    path: /etc/profile
+    regexp: umask.*
+    replace: umask {{ var_accounts_user_umask }}
+
+- name: CIS 5.5.5 | set user umask in /etc/bashrc
+  replace:
+    path: /etc/bashrc
+    regexp: umask.*
+    replace: umask {{ var_accounts_user_umask }}
+
+

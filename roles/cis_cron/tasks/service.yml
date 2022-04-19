@@ -1,0 +1,13 @@
+---
+
+- name: gather the package facts
+  package_facts:
+    manager: auto
+
+- name: Enable service crond
+  service:
+    name: crond
+    enabled: "{{ crond_service_enabled }}"
+    state: "{{ crond_service_state }}"
+  when:
+  - '"cronie" in ansible_facts.packages'

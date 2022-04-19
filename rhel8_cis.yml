@@ -1,0 +1,21 @@
+---
+
+- name: cis hardening for rhel8
+  hosts: all
+  roles:
+  - cis_services
+  - cis_ssh
+  - cis_cron
+  - cis_file_permissions
+  - cis_firewall
+  - cis_audit
+  - cis_login_banners
+  - cis_remove_packages
+  - cis_selinux
+  - cis_kernel_settings
+  - cis_kernel_modules
+  - cis_grub
+  - cis_rsyslog
+  - cis_single_user
+  - cis_account_settings
+  - cis_pam

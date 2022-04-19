@@ -1,0 +1,9 @@
+# CIS 5.4.1
+password_pam_minclass: 4
+password_pam_minlen: 14
+password_pam_retry: 3
+# CIS 5.4.2
+accounts_passwords_pam_faillock_unlock_time: 900
+accounts_passwords_pam_faillock_deny: 5
+# CIS 5.4.3 
+password_pam_unix_remember: 5

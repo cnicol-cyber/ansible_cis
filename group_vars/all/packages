@@ -1,0 +1,5 @@
+ypbind_package_state: absent
+telnet_package_state: absent
+openldap_clients_package_state: absent
+xinetd_package_state: absent
+xorg_x11_server_common_package_state: absent

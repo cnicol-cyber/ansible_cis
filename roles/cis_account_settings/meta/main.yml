@@ -1,0 +1,18 @@
+galaxy_info:
+  author: Pat Harrison
+  description: cis hardening - account settings
+  company: pharriso
+
+  license: MIT
+
+  min_ansible_version: 2.9
+
+  platforms:
+  - name: rhel
+    versions:
+      - 8
+
+  galaxy_tags: []
+
+dependencies: []
+

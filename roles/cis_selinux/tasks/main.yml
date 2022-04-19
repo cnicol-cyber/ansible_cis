@@ -1,0 +1,11 @@
+---
+
+- name: CIS 1.7.1.6 | ensure setroubleshoot is not installed
+  package:
+    name: setroubleshoot
+    state: absent
+
+- name: CIS 1.7.1.7 | ensure mctrans is not installed
+  package:
+    name: mcstrans
+    state: absent

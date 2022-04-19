@@ -1,0 +1,53 @@
+---
+
+- name: CIS 4.1.1.1 | ensure auditd is installed
+  package:
+    name: audit-libs
+    state: installed
+
+- name: CIS 4.1.1.2 | ensure auditd is running
+  service:
+    name: auditd
+    enabled: yes
+    state: started
+
+- name: CIS 4.1.2.1 | ensure audit log max file size set
+  lineinfile:
+    dest: /etc/audit/auditd.conf
+    line:  max_log_file = {{ auditd_max_log_file }}
+    regexp: ^\s*max_log_file\s*=\s*.*$
+    state: present
+    create: true
+
+- name: CIS 4.1.2.2 | ensure audit log files are kept
+  lineinfile:
+    dest: /etc/audit/auditd.conf
+    line: max_log_file_action = {{ auditd_max_log_file_action }}
+    regexp: ^\s*max_log_file_action\s*=\s*.*$
+    state: present
+    create: true
+
+- name: CIS 4.1.2.3 | disable system when audit logs are full
+  lineinfile:
+    dest: /etc/audit/auditd.conf
+    line: admin_space_left_action = {{ auditd_admin_space_left_action }}
+    regexp: ^\s*admin_space_left_action\s*=\s*.*$
+    state: present
+    create: true
+
+- name: CIS 4.1.2.3 | disable system when audit logs full
+  lineinfile:
+    dest: /etc/audit/auditd.conf
+    line: space_left_action = {{ auditd_space_left_action }}
+    regexp: ^\s*space_left_action\s*=\s*.*$
+    state: present
+    create: true
+
+
+- name: CIS 4.1.2.3 | audit set email account
+  lineinfile:
+    dest: /etc/audit/auditd.conf
+    line: action_mail_acct = {{ auditd_action_mail_acct }}
+    regexp: ^\s*action_mail_acct\s*=\s*.*$
+    state: present
+    create: true

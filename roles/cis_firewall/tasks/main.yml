@@ -1,0 +1,12 @@
+---
+
+- name: CIS 3.4.1.1 | ensure firewall service is installed
+  package:
+    name: firewalld
+    state: present
+
+- name: CIS 3.4.2.1 | ensure firewall service is running
+  service:
+    name: firewalld
+    enabled: 'yes'
+    state: started

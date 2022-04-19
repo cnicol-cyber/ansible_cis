@@ -1,0 +1,195 @@
+---
+
+- name: check pam package is installed
+  package_facts:
+    manager: auto
+
+- name: CIS 5.4.1 | password creation policy minclass
+  lineinfile:
+    create: true
+    dest: /etc/security/pwquality.conf
+    regexp: ^#?\s*minclass
+    line: minclass = {{ password_pam_minclass }}
+  when: '"pam" in ansible_facts.packages'
+
+- name: CIS 5.4.1 | password creation policy minlen
+  lineinfile:
+    create: true
+    dest: /etc/security/pwquality.conf
+    regexp: ^#?\s*minlen
+    line: minlen = {{ password_pam_minlen }}
+  when: '"pam" in ansible_facts.packages'
+
+- name: CIS 5.4.1 | permitted password retry per-session - system-auth (change)
+  replace:
+    dest: /etc/pam.d/system-auth
+    regexp: (^.*\spam_pwquality.so\s.*retry\s*=\s*)(\S+)(.*$)
+    replace: \g<1>{{ password_pam_retry }}\g<3>
+  when: '"pam" in ansible_facts.packages'
+
+- name: CIS 5.4.1 | permitted password retry per-session - system-auth (add)
+  replace:
+    dest: /etc/pam.d/system-auth
+    regexp: ^.*\spam_pwquality.so\s(?!.*retry\s*=\s*).*$
+    replace: \g<0> retry={{ password_pam_retry }}
+  when: '"pam" in ansible_facts.packages'
+
+- name: CIS 5.4.2 | pam_faillock preauth unlock_time before pam_unix.so
+  pamd:
+    name: '{{ item }}'
+    type: auth
+    control: sufficient
+    module_path: pam_unix.so
+    new_type: auth
+    new_control: required
+    new_module_path: pam_faillock.so
+    module_arguments: preauth silent unlock_time={{ accounts_passwords_pam_faillock_unlock_time }}
+    state: before
+  loop:
+    - system-auth
+    - password-auth
+  when: '"pam" in ansible_facts.packages'
+
+- name: CIS 5.4.2 | unlock_time argument to pam_faillock preauth
+  pamd:
+    name: '{{ item }}'
+    type: auth
+    control: required
+    module_path: pam_faillock.so
+    module_arguments: preauth silent unlock_time={{ accounts_passwords_pam_faillock_unlock_time }}
+    state: args_present
+  loop:
+    - system-auth
+    - password-auth
+  when: '"pam" in ansible_facts.packages'
+
+- name: CIS 5.4.2 | auth pam_faillock authfail unlock_interval after pam_unix.so
+  pamd:
+    name: '{{ item }}'
+    type: auth
+    control: sufficient
+    module_path: pam_unix.so
+    new_type: auth
+    new_control: '[default=die]'
+    new_module_path: pam_faillock.so
+    module_arguments: authfail unlock_time={{ accounts_passwords_pam_faillock_unlock_time }}
+    state: after
+  loop:
+    - system-auth
+  when: '"pam" in ansible_facts.packages'
+
+- name: CIS 5.4.2 | unlock_time argument to auth pam_faillock authfail
+  pamd:
+    name: '{{ item }}'
+    type: auth
+    control: '[default=die]'
+    module_path: pam_faillock.so
+    module_arguments: authfail unlock_time={{ accounts_passwords_pam_faillock_unlock_time }}
+    state: args_present
+  loop:
+    - system-auth
+  when: '"pam" in ansible_facts.packages'
+
+- name: CIS 5.4.2 | account pam_faillock before pam_unix.so
+  pamd:
+    name: '{{ item }}'
+    type: account
+    control: required
+    module_path: pam_unix.so
+    new_type: account
+    new_control: required
+    new_module_path: pam_faillock.so
+    state: before
+  loop:
+    - system-auth
+    - password-auth
+  when: '"pam" in ansible_facts.packages'
+
+- name: CIS 5.4.2 | auth pam_faillock preauth deny before pam_unix.so
+  pamd:
+    name: '{{ item }}'
+    type: auth
+    control: sufficient
+    module_path: pam_unix.so
+    new_type: auth
+    new_control: required
+    new_module_path: pam_faillock.so
+    module_arguments: preauth silent deny={{ accounts_passwords_pam_faillock_deny }}
+    state: before
+  loop:
+    - system-auth
+    - password-auth
+  when: '"pam" in ansible_facts.packages'
+
+- name: CIS 5.4.2 | deny argument to auth pam_faillock preauth
+  pamd:
+    name: '{{ item }}'
+    type: auth
+    control: required
+    module_path: pam_faillock.so
+    module_arguments: preauth silent deny={{ accounts_passwords_pam_faillock_deny }}
+    state: args_present
+  loop:
+    - system-auth
+    - password-auth
+  when: '"pam" in ansible_facts.packages'
+
+- name: CIS 5.4.2 | auth pam_faillock authfail deny after pam_unix.so
+  pamd:
+    name: '{{ item }}'
+    type: auth
+    control: sufficient
+    module_path: pam_unix.so
+    new_type: auth
+    new_control: '[default=die]'
+    new_module_path: pam_faillock.so
+    module_arguments: authfail deny={{ accounts_passwords_pam_faillock_deny }}
+    state: after
+  loop:
+    - system-auth
+  when: '"pam" in ansible_facts.packages'
+
+- name: CIS 5.4.2 | deny argument to auth pam_faillock authfail
+  pamd:
+    name: '{{ item }}'
+    type: auth
+    new_type: auth
+    control: '[default=die]'
+    module_path: pam_faillock.so
+    module_arguments: authfail deny={{ accounts_passwords_pam_faillock_deny }}
+    state: args_present
+  loop:
+    - system-auth
+  when: '"pam" in ansible_facts.packages'
+
+- name: CIS 5.4.2 | account pam_faillock before pam_unix.so
+  pamd:
+    name: '{{ item }}'
+    type: account
+    control: required
+    module_path: pam_unix.so
+    new_type: account
+    new_control: required
+    new_module_path: pam_faillock.so
+    state: before
+  loop:
+    - system-auth
+    - password-auth
+  when: '"pam" in ansible_facts.packages'
+
+- name: CIS 5.4.3 | password reuse - system-auth (change)
+  replace:
+    dest: /etc/pam.d/system-auth
+    regexp: ^(password\s+sufficient\s+pam_unix\.so\s.*remember\s*=\s*)(\S+)(.*)$
+    replace: \g<1>{{ password_pam_unix_remember }}\g<3>
+  when: '"pam" in ansible_facts.packages'
+
+- name: CIS 5.4.3 | password reuse - system-auth (add)
+  replace:
+    dest: /etc/pam.d/system-auth
+    regexp: ^password\s+sufficient\s+pam_unix\.so\s(?!.*remember\s*=\s*).*$
+    replace: \g<0> remember={{ password_pam_unix_remember }}
+  when: '"pam" in ansible_facts.packages'
+
+
+

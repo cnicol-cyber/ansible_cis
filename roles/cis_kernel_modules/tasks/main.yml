@@ -1,0 +1,64 @@
+---
+
+- name: CIS 1.1.4 | ensure kernel module udf is disabled
+  lineinfile:
+    create: true
+    dest: /etc/modprobe.d/udf.conf
+    regexp: udf
+    line: install udf /bin/true
+
+- name: CIS 1.1.23 | ensure kernel module usb-storage is disabled
+  lineinfile:
+    create: true
+    dest: /etc/modprobe.d/usb-storage.conf
+    regexp: usb-storage
+    line: install usb-storage /bin/true
+
+- name: CIS 1.1.1.1 | ensure kernel module cramfs is disabled
+  lineinfile:
+    create: true
+    dest: /etc/modprobe.d/cramfs.conf
+    regexp: cramfs
+    line: install cramfs /bin/true
+
+- name: CIS 1.1.1.3 | ensure kernel module squashfs is disabled
+  lineinfile:
+    create: true
+    dest: /etc/modprobe.d/squashfs.conf
+    regexp: squashfs
+    line: install squashfs /bin/true
+
+- name: CIS 3.3.1 | ensure kernel module dccp is disabled
+  lineinfile:
+    create: true
+    dest: /etc/modprobe.d/dccp.conf
+    regexp: dccp
+    line: install dccp /bin/true
+
+- name: CIS 3.3.2 | ensure kernel module sctp is disabled
+  lineinfile:
+    create: true
+    dest: /etc/modprobe.d/sctp.conf
+    regexp: sctp
+    line: install sctp /bin/true
+
+- name: CIS 3.3.3 | ensure kernel module rds is disabled
+  lineinfile:
+    create: true
+    dest: /etc/modprobe.d/rds.conf
+    regexp: rds
+    line: install rds /bin/true
+
+- name: CIS 3.3.4 | ensure kernel module tipc is disabled
+  lineinfile:
+    create: true
+    dest: /etc/modprobe.d/tipc.conf
+    regexp: tipc
+    line: install tipc /bin/true
+
+- name: CIS 3.6 | disable ipv6 module
+  lineinfile:
+    create: true
+    dest: /etc/modprobe.d/ipv6.conf
+    regexp: ^options\s+ipv6\s+disable=\d
+    line: options ipv6 disable=1

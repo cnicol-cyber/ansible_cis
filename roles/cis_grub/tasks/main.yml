@@ -1,0 +1,16 @@
+---
+
+- name: CIS 1.5.1 | test for existence of /boot/grub2/grub.cfg
+  stat:
+    path: /boot/grub2/grub.cfg
+  register: file_exists
+
+- name: CIS 1.5.1 | ensure permissions on bootloader config
+  file:
+    path: /boot/grub2/grub.cfg
+    owner: '0'
+    group: '0'
+    mode: '0600'
+  when:
+  - file_exists.stat is defined and file_exists.stat.exists
+    

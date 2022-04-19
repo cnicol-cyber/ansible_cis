@@ -1,0 +1,7 @@
+---
+
+- name: include service.yml
+  include_tasks: service.yml
+
+- name: include file_permissions.yml
+  include_tasks: file_permissions.yml

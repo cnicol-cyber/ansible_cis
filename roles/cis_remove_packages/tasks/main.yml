@@ -1,0 +1,26 @@
+---
+
+- name: CIS 2.1.1 | ensure xinetd is not installed
+  package:
+    name: xinetd
+    state: "{{ xinetd_package_state }}"
+
+- name: CIS 2.2.2 | ensure xorg-x11-server-common is not installed
+  package:
+    name: xorg-x11-server-common
+    state: "{{ xorg_x11_server_common_package_state }}"
+
+- name: CIS 2.3.1 | ensure nis client is not installed
+  package:
+    name: ypbind
+    state: "{{ ypbind_package_state }}"
+
+- name: CIS 2.3.2 | ensure telnet client is not installed
+  package:
+    name: telnet
+    state: "{{ telnet_package_state }}"
+
+- name: CIS 2.3.3 | ensure openldap-clients is not installed
+  package:
+    name: openldap-clients
+    state: "{{ openldap_clients_package_state }}"

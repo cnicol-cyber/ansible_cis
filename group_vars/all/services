@@ -1,0 +1,68 @@
+# CIS 1.1.22
+autofs_service_enabled: no
+autofs_service_state: stopped
+autofs_service_masked: yes
+# CIS 1.2.2
+rhnsd_service_enabled: no
+rhnsd_service_state: stopped
+rhnsd_service_masked: yes
+# CIS 2.2.3
+rsyncd_service_enabled: no
+rsyncd_service_state: stopped
+rsyncd_service_masked: yes
+# CIS 2.2.4
+avahi_service_enabled: no
+avahi_service_state: stopped
+avahi_service_masked: yes
+# CIS 2.2.5
+snmpd_service_enabled: no
+snmpd_service_state: stopped
+snmpd_service_masked: yes
+# CIS 2.2.6
+squid_service_enabled: no
+squid_service_state: stopped
+squid_service_masked: yes
+# CIS 2.2.7
+smb_service_enabled: no
+smb_service_state: stopped
+smb_service_masked: yes
+# CIS 2.2.8
+dovecot_service_enabled: no
+dovecot_service_state: stopped
+dovecot_service_masked: yes
+# CIS 2.2.9
+httpd_service_enabled: no
+httpd_service_state: stopped
+httpd_service_masked: yes
+# CIS 2.2.10
+vsftpd_service_enabled: no
+vsftpd_service_state: stopped
+vsftpd_service_masked: yes
+# 2.2.11
+named_service_enabled: no
+named_service_state: stopped
+named_service_masked: yes
+# CIS 2.2.12
+nfs_server_service_enabled: no
+nfs_server_service_state: stopped
+nfs_server_service_masked: yes
+# CIS 2.2.13
+rpcbind_service_enabled: no
+rpcbind_service_state: stopped
+rpcbind_service_masked: yes
+# CIS 2.2.14
+slapd_service_enabled: no
+slapd_service_state: stopped
+slapd_service_masked: yes
+# CIS 2.2.15
+dhcpd_service_enabled: no
+dhcpd_service_state: stopped
+dhcpd_service_masked: yes
+# CIS 2.2.16
+cups_service_enabled: no
+cups_service_state: stopped
+cups_service_masked: yes
+# CIS 2.2.17
+ypserv_service_enabled: no
+ypserv_service_state: stopped
+ypserv_service_masked: yes

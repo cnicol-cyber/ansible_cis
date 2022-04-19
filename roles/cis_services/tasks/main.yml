@@ -1,0 +1,149 @@
+---
+
+- name: Gather the service facts
+  service_facts:
+
+- name: CIS 1.2.2 | disable service rhnsd
+  systemd:
+    name: rhnsd.service
+    enabled: "{{ rhnsd_service_enabled }}"
+    state: "{{ rhnsd_service_state }}"
+    masked: "{{ rhnsd_service_masked }}"
+  when: '"rhnsd.service" in ansible_facts.services'
+
+- name: CIS 1.1.22 | disable service autofs
+  systemd:
+    name: autofs.service
+    enabled: "{{ autofs_service_enabled }}"
+    state: "{{ autofs_service_state }}"
+    masked: "{{ autofs_service_masked }}"
+  when: '"autofs.service" in ansible_facts.services'
+
+
+- name: CIS 2.2.3 | disable service rsyncd
+  systemd:
+    name: rsyncd.service
+    enabled: "{{ rsyncd_service_enabled }}"
+    state: "{{ rsyncd_service_state }}"
+    masked: "{{ rsyncd_service_masked }}"
+  when: '"rsyncd.service" in ansible_facts.services'
+
+- name: CIS 2.2.4 | disable service avahi
+  systemd:
+    name: avahi-daemon.service
+    enabled: "{{ avahi_service_enabled }}"
+    state: "{{ avahi_service_state }}"
+    masked: "{{ avahi_service_masked }}"
+  when: '"avahi-daemon.service" in ansible_facts.services'
+
+- name: CIS 2.2.5 | disable service snmpd
+  systemd:
+    name: snmpd.service
+    enabled: "{{ snmpd_service_enabled }}"
+    state: "{{ snmpd_service_state }}"
+    masked: "{{ snmpd_service_masked }}"
+  when: '"snmpd.service" in ansible_facts.services'
+
+- name: CIS 2.2.6 | disable service squid
+  systemd:
+    name: squid.service
+    enabled: "{{ squid_service_enabled }}"
+    state: "{{ squid_service_state }}"
+    masked: "{{ squid_service_masked }}"
+  when: '"squid.service" in ansible_facts.services'
+
+- name: CIS 2.2.7 | disable service smb
+  systemd:
+    name: smb.service
+    enabled: "{{ smb_service_enabled }}"
+    state: "{{ smb_service_state }}"
+    masked: "{{ smb_service_masked }}"
+  when: '"smb.service" in ansible_facts.services'
+
+- name: CIS 2.2.8 | disable service dovecot
+  systemd:
+    name: dovecot.service
+    enabled: "{{ dovecot_service_enabled }}"
+    state: "{{ dovecot_service_state }}"
+    masked: "{{ dovecot_service_masked }}"
+  when: '"dovecot.service" in ansible_facts.services'
+
+- name: CIS 2.2.9 | disable service httpd
+  systemd:
+    name: httpd.service
+    enabled: "{{ httpd_service_enabled }}"
+    state: "{{ httpd_service_state }}"
+    masked: "{{ httpd_service_masked }}"
+  when: '"httpd.service" in ansible_facts.services'
+
+- name: CIS 2.2.10 | disable service vsftpd
+  systemd:
+    name: vsftpd.service
+    enabled: "{{ vsftpd_service_enabled }}"
+    state: "{{ vsftpd_service_state }}"
+    masked: "{{ vsftpd_service_masked }}"
+  when: '"vsftpd.service" in ansible_facts.services'
+
+- name: CIS 2.2.11 | disable service named
+  systemd:
+    name: named.service
+    enabled: "{{ named_service_enabled }}"
+    state: "{{ named_service_state }}"
+    masked: "{{ named_service_masked }}"
+  when: '"named.service" in ansible_facts.services'
+
+- name: CIS 2.2.12 | disable service nfs-server
+  systemd:
+    name: nfs-server.service
+    enabled: "{{ nfs_server_service_enabled }}"
+    state: "{{ nfs_server_service_state }}"
+    masked: "{{ nfs_server_service_masked }}"
+  when: '"nfs-server.service" in ansible_facts.services'
+
+- name: CIS 2.2.13 | disable service rpcbind.service
+  systemd:
+    name: rpcbind.service
+    enabled: "{{ rpcbind_service_enabled }}"
+    state: "{{ rpcbind_service_state }}"
+    masked: "{{ rpcbind_service_masked }}"
+  when: '"rpcbind.service" in ansible_facts.services'
+
+- name: CIS 2.2.13 | disable service rpcbind.socket
+  systemd:
+    name: rpcbind.socket
+    enabled: "{{ rpcbind_service_enabled }}"
+    state: "{{ rpcbind_service_state }}"
+    masked: "{{ rpcbind_service_masked }}"
+  when: '"rpcbind.socket" in ansible_facts.services'
+
+- name: CIS 2.2.14 | disable service slapd
+  systemd:
+    name: slapd.service
+    enabled: "{{ slapd_service_enabled }}"
+    state: "{{ slapd_service_state }}"
+    masked: "{{ slapd_service_masked }}"
+  when: '"slapd.service" in ansible_facts.services'
+
+- name: CIS 2.2.15 | disable service dhcpd
+  systemd:
+    name: dhcpd.service
+    enabled: "{{ dhcpd_service_enabled }}"
+    state: "{{ dhcpd_service_state }}"
+    masked: "{{ dhcpd_service_masked }}"
+  when: '"dhcpd.service" in ansible_facts.services'
+
+- name: CIS 2.2.16 | disable service cups
+  systemd:
+    name: cups.service
+    enabled: "{{ cups_service_enabled }}"
+    state: "{{ cups_service_state }}"
+    masked: "{{ cups_service_masked }}"
+  when: '"cups.service" in ansible_facts.services'
+
+- name: CIS 2.2.17 | disable service ypserv
+  systemd:
+    name: ypserv.service
+    enabled: "{{ ypserv_service_enabled }}"
+    state: "{{ ypserv_service_state }}"
+    masked: "{{ ypserv_service_masked }}"
+  when: '"ypserv.service" in ansible_facts.services'
