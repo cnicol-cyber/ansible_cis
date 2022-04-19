@@ -8,7 +8,9 @@ Requirements
 
 Install collections listed in collections/requirements.yml
 
+```
 ansible-galaxy collection install -r collections/requirements.yml
+```
 
 
 Running the playbook
