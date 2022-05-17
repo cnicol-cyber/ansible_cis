@@ -6,14 +6,12 @@
     state: present
 
 - name: 1.3.2 Ensure filesystem integrity is regularly checked
-  service: 
-    name: aidecheck.service
-    enabled: yes
-    state: started
-
-- name: 1.3.2 Ensure aidecheck.timer is running
-  service: 
-    name: aidecheck.timer
-    enabled: yes
-    state: started
+  cron:
+    name: run AIDE check
+    minute: 5
+    hour: 4
+    weekday: 0
+    user: root
+    job: /usr/sbin/aide --check
+  when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
 
