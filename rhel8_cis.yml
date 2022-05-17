@@ -19,3 +19,4 @@
   - cis_single_user
   - cis_account_settings
   - cis_pam
+  - cis_file_integrity
