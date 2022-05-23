@@ -64,3 +64,13 @@
     validate: /usr/sbin/sshd -t -f %s
   when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
 
+- name: Ensure SSH MaxStartups is configured
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    create: true
+    regexp: (?i)^\s*MaxStartups\s+
+    line: MaxStartups {{ var_sshd_set_maxstartups }}
+    state: present
+    insertbefore: ^[#\s]*Match
+    validate: /usr/sbin/sshd -t -f %s
+

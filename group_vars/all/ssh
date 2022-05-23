@@ -1,1 +1,2 @@
 var_sshd_max_sessions: '4'
+var_sshd_set_maxstartups: 10:30:60
