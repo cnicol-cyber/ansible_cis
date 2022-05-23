@@ -20,3 +20,4 @@
   - cis_account_settings
   - cis_pam
   - cis_file_integrity
+  - cis_process_hardening
