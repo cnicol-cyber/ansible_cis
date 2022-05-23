@@ -1,0 +1,17 @@
+---
+
+- name: 1.5.1 Ensure core dump storage is disabled
+  lineinfile:
+    path: /etc/systemd/coredump.conf
+    create: false
+    regexp: ^\s*Storage\s*=\s*
+    line: Storage=none
+    state: present
+
+- name: 1.5.2 Ensure core dump backtraces are disabled
+  lineinfile:
+    path: /etc/systemd/coredump.conf
+    create: false
+    regexp: ^\s*ProcessSizeMax\s*=\s*
+    line: ProcessSizeMax=0
+    state: present
